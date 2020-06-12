@@ -7,8 +7,7 @@ from users.models import Profile
 class ProfileAdmin(admin.ModelAdmin):
     list_display = (
         'id',
-        'user__first_name',
-        'user__last_name',
+        'user',
         'gender',
         'phone_number',
     )
