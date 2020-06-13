@@ -1,6 +1,7 @@
 import sys
 import re
 
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.core import exceptions
 from django.core.validators import validate_email
@@ -104,3 +105,40 @@ class ProfileSerializer(serializers.ModelSerializer):
             "birthday",
             "gender",
         )
+
+
+class AuthCustomTokenSerializer(serializers.Serializer):
+    """
+    Serializer class for authenticating user credentials
+    """
+    username = serializers.CharField()
+    password = serializers.CharField()
+
+    def validate(self, attrs):
+        username = attrs.get('username')
+        password = attrs.get('password')
+
+        if username and password:
+            try:
+                validate_email(username)
+
+                user_request = get_object_or_404(User, email=username)
+                username = user_request.username
+            except ValidationError as e:
+                try:
+                    user_request = get_object_or_404(
+                        Profile, phone_number=username)
+                    username = user_request.user.username
+                except ValidationError as e:
+                    return Response({
+                        "status": 400,
+                        "error": True,
+                        "message": str(e),
+                    })
+            user = authenticate(username=username, password=password)
+        else:
+            msg = _('Must include email/phone number and a password.')
+            raise serializers.ValidationError(msg)
+
+        attrs['user'] = user
+        return attrs
