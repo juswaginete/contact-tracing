@@ -12,3 +12,10 @@
 6. Edit `local.py` settings to match your local environment setup
 7. Migrate the database using the command `python manage.py migrate`
 8. Run the app using `python manage.py runserver`
+
+##### Frontend setup 
+
+1. Go to `assets/scripts/frontend` directory
+2. Run  `npm install`
+2. Run `ng build` to build the angular project, or add `--watch` to watch the changes
+

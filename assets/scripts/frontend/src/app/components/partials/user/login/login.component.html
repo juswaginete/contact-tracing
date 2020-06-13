@@ -1,0 +1,20 @@
+<div class="container mx-auto">
+  <div class="my-64 w-11/12 mx-auto rounded py-16 md:shadow-xl md:w-3/5 md:px-6 lg:w-2/4 lg:my-24 xl:w-5/12">
+    <h1 class="text-4xl mb-10 text-center">Login</h1>
+    <form>
+      <!-- <span [hidden]="!form.errors">Invalid Email/Password. Please try again.</span> -->
+      <div class="mb-4">
+          <label>Email</label>
+          <input formControlName="email" type="text" class="w-full border border-gray-700 rounded-sm p-2 text-xl mt-2 focus:outline-none focus:border-indigo-700">
+          <!-- <span [hidden]="form.valid('email')">Invalid email format.</span> -->
+      </div>
+      <div class="mb-4">
+          <label>Password</label>
+          <input formControlName="password" type="password" class="w-full border border-gray-700 rounded-sm p-2 text-xl mt-2 focus:outline-none focus:border-indigo-700">
+          <!-- <span [hidden]="form.valid('password')">Password is required.</span> -->
+      </div>
+      <button type="submit" class="bg-indigo-800 w-full rounded-sm py-3 text-white text-xl mt-4 mb-2 focus:outline-none focus:bg-indigo-700">Login</button>
+      <div class="text-center"><a uiSref="register" class=" text-indigo-700">create an account</a></div>
+    </form>
+  </div>
+</div>
