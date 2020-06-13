@@ -8,7 +8,6 @@ DB_HOST = 'localhost'
 SECRET_KEY = 't_gt#)i7$-z=tg3s4v_8^jidhpfdzk#bp^l5!#qwztjpg37-x8'
 
 DEBUG = True
-ALLOWED_HOSTS = ['*']
 
 DATABASES = {
     # Ends with "postgresql", "mysql", "sqlite3" or "oracle".
@@ -22,16 +21,16 @@ DATABASES = {
     },
 }
 
-INSTALLED_APPS += ['django_extensions']
+# INSTALLED_APPS += ['django_extensions']
 
-if DEBUG_TOOLBAR:
-    INSTALLED_APPS = [
-        'debug_toolbar',
-    ] + INSTALLED_APPS
+# if DEBUG_TOOLBAR:
+#     INSTALLED_APPS = [
+#         'debug_toolbar',
+#     ] + INSTALLED_APPS
 
-    MIDDLEWARE = [
-        'debug_toolbar.middleware.DebugToolbarMiddleware',
-    ] + MIDDLEWARE
+#     MIDDLEWARE = [
+#         'debug_toolbar.middleware.DebugToolbarMiddleware',
+#     ] + MIDDLEWARE
 
 
 # EMAIL BACKEND
