@@ -44,6 +44,13 @@ class UserModelSerializer(serializers.ModelSerializer):
         fields = ('first_name', 'username', 'last_name', 'email', 'password')
 
 
+class UserProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Profile
+        fields = '__all__'
+
+
 class ProfileSerializer(serializers.ModelSerializer):
     """
     Serializer class fro User Profiling with UniqueValidators
