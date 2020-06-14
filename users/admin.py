@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
 
-from users.models import Profile
+from users.models import Profile, ServiceSchedule
 
 
 class ProfileAdmin(admin.ModelAdmin):
@@ -19,4 +19,18 @@ class ProfileAdmin(admin.ModelAdmin):
     )
 
 
+class ServiceScheduleAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'name',
+        'start_time',
+        'end_time',
+    )
+
+    search_fields = (
+        'name',
+    )
+
+
 admin.site.register(Profile, ProfileAdmin)
+admin.site.register(ServiceSchedule, ServiceScheduleAdmin)
