@@ -76,15 +76,17 @@ class ProfileSerializer(serializers.ModelSerializer):
             user_type = self.data.get('user_type')
             service_schedule = ServiceSchedule.objects.get(id=self.data.get('service_schedule'))
 
-            user = User(
-                email=email,
-                username=username,
-                first_name=first_name,
-                last_name=last_name,
-                password=password
-            )
-            user.set_password(password)
-            user.save()
+            if user_type == 0:
+                user = User(
+                    email=email,
+                    username=username,
+                    first_name=first_name,
+                    last_name=last_name,
+                    is_staff=True,
+                    password=password
+                )
+                user.set_password(password)
+                user.save()
 
             user_profile = Profile(
                 user=user,
