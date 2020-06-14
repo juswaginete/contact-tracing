@@ -13,4 +13,5 @@ urlpatterns = [
     path('login/', include('users.urls_login')),
     path('logout/', include('users.urls_logout')),
     path('profiles/', include(profile_router.urls)),
+    path('update/', include('users.urls_update')),
 ]
