@@ -65,6 +65,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             phone_number = self.data.get('phone_number')
             birthday = self.data.get('birthday')
             gender = self.data.get('gender')
+            user_type = self.data.get('user_type')
 
             user = User(
                 email=email,
@@ -81,6 +82,7 @@ class ProfileSerializer(serializers.ModelSerializer):
                 phone_number=phone_number,
                 birthday=birthday,
                 gender=gender,
+                user_type=user_type,
             )
             user_profile.save()
 
@@ -89,6 +91,7 @@ class ProfileSerializer(serializers.ModelSerializer):
                 "phone_number": phone_number,
                 "gender": gender,
                 "birthday": birthday,
+                "user_type": user_type,
             }
         except Exception as e:
             return {
@@ -104,6 +107,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             "phone_number",
             "birthday",
             "gender",
+            "user_type",
         )
 
 
