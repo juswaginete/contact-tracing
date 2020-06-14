@@ -1,0 +1,29 @@
+[
+{
+    "model": "users.serviceschedule",
+    "pk": 1,
+    "fields": {
+        "name": "1st Service",
+        "start_time": "08:00:00",
+        "end_time": "09:30:00"
+    }
+},
+{
+    "model": "users.serviceschedule",
+    "pk": 2,
+    "fields": {
+        "name": "2nd Service",
+        "start_time": "09:30:00",
+        "end_time": "11:00:00"
+    }
+},
+{
+    "model": "users.serviceschedule",
+    "pk": 3,
+    "fields": {
+        "name": "3rd Service",
+        "start_time": "03:30:00",
+        "end_time": "05:00:00"
+    }
+}
+]
