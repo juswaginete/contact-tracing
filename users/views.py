@@ -1,3 +1,5 @@
+import datetime
+
 from http import HTTPStatus
 
 from django.contrib.auth import login as django_login, logout as django_logout
@@ -17,7 +19,12 @@ from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from users.serializers import ProfileSerializer, AuthCustomTokenSerializer
+from users.models import Profile
+from users.serializers import (
+    AuthCustomTokenSerializer,
+    ProfileSerializer,
+    UserProfileSerializer
+)
 
 
 class UserProfileView(APIView):
@@ -41,6 +48,9 @@ def get_current_datetime():
 
 
 class ObtainAuthToken(APIView):
+    """
+    Handles api endpoint for logging in
+    """
 
     def post(self, request, *args, **kwargs):
         serializer = AuthCustomTokenSerializer(data=request.data)
@@ -68,8 +78,14 @@ class ObtainAuthToken(APIView):
 
 
 class LogoutView(APIView):
+    """
+    Handles api endpoint for logging out
+    """
 
     def post(self, request, *args, **kwargs):
+        """
+        Hnadles in retrieving user token and deletes it afterwards
+        """
         try:
             token = Token.objects.get(key=request.user.auth_token)
         except Token.DoesNotExist:
@@ -80,3 +96,25 @@ class LogoutView(APIView):
 
         token.delete()
         return Response(HTTPStatus.OK)
+
+
+class UserProfileViewSet(viewsets.ViewSet):
+    """
+    Handles api endpoints for profiles list and details
+    """
+
+    def list(self, request):
+        """
+        Display all profiles
+        """
+        profiles = Profile.objects.all()
+        serializer = UserProfileSerializer(profiles, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        """
+        Retrieves user profiles from database
+        """
+        profile = Profile.objects.get(user__id=pk)
+        serializer = UserProfileSerializer(profile)
+        return Response(serializer.data)
