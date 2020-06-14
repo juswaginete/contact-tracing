@@ -15,7 +15,7 @@ from rest_framework.response import Response
 from rest_framework.settings import settings
 from rest_framework.validators import UniqueValidator
 
-from users.models import Profile
+from users.models import Profile, ServiceSchedule
 
 
 class UserModelSerializer(serializers.ModelSerializer):
@@ -53,6 +53,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         max_length=15,
         validators=[UniqueValidator(queryset=Profile.objects.all())]
     )
+    service_schedule = serializers.IntegerField()
 
     def process_create_user(self, request):
         try:
@@ -66,6 +67,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             birthday = self.data.get('birthday')
             gender = self.data.get('gender')
             user_type = self.data.get('user_type')
+            service_schedule = ServiceSchedule.objects.get(id=self.data.get('service_schedule'))
 
             user = User(
                 email=email,
@@ -83,6 +85,7 @@ class ProfileSerializer(serializers.ModelSerializer):
                 birthday=birthday,
                 gender=gender,
                 user_type=user_type,
+                service_schedule=service_schedule,
             )
             user_profile.save()
 
@@ -108,6 +111,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             "birthday",
             "gender",
             "user_type",
+            "service_schedule",
         )
 
 
